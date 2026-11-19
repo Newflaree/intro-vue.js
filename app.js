@@ -1,4 +1,4 @@
-const quotes = [
+const originalQuotes = [
   {
     quote:
       "The night is darkest just before the dawn. And I promise you, the dawn is coming.",
@@ -28,13 +28,23 @@ const quotes = [
   },
 ];
 
-const { createApp, ref } = Vue;
+const { createApp, ref, computed } = Vue;
 
 const app = createApp({
   setup() {
     const showAuthor = ref(true);
+    const quotes = ref(originalQuotes);
+    const totalQuotes = computed(() => {
+      return quotes.value.length;
+    });
+
     const authorToggler = () => {
       showAuthor.value = !showAuthor.value;
+    };
+
+    const addQuote = () => {
+      quotes.value.unshift({ quote: "Hola Mundo", author: "Camilo López" });
+      console.log(quotes);
     };
 
     return {
@@ -42,6 +52,8 @@ const app = createApp({
       showAuthor,
 
       authorToggler,
+      addQuote,
+      totalQuotes,
     };
   },
 });
