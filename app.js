@@ -28,12 +28,20 @@ const quotes = [
   },
 ];
 
-const { createApp } = Vue;
+const { createApp, ref } = Vue;
 
 const app = createApp({
   setup() {
+    const showAuthor = ref(true);
+    const authorToggler = () => {
+      showAuthor.value = !showAuthor.value;
+    };
+
     return {
       quotes,
+      showAuthor,
+
+      authorToggler,
     };
   },
 });
