@@ -34,6 +34,8 @@ const app = createApp({
   setup() {
     const showAuthor = ref(true);
     const quotes = ref(originalQuotes);
+    const newMessage = ref("");
+
     const totalQuotes = computed(() => {
       return quotes.value.length;
     });
@@ -43,13 +45,15 @@ const app = createApp({
     };
 
     const addQuote = () => {
-      quotes.value.unshift({ quote: "Hola Mundo", author: "Camilo López" });
-      console.log(quotes);
+      if (newMessage.value.length <= 0) return;
+      quotes.value.unshift({ quote: newMessage.value, author: "Camilo López" });
+      newMessage.value = "";
     };
 
     return {
       quotes,
       showAuthor,
+      newMessage,
 
       authorToggler,
       addQuote,
